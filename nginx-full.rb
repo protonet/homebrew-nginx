@@ -47,6 +47,7 @@ class NginxFull < Formula
   depends_on 'notice-nginx-module' if build.include? 'with-notice-module'
   depends_on 'subs-filter-nginx-module' if build.include? 'with-subs-filter-module'
   depends_on 'upload-nginx-module' if build.include? 'with-upload-module'
+  depends_on 'upload-progress-nginx-module' if build.include? 'with-upload-progress-module'
 
   skip_clean 'logs'
 
@@ -100,6 +101,7 @@ class NginxFull < Formula
       ['with-auth-req',          'with-http_auth_request_module','Compile with support for HTTP Auth Request Module'],
       ['with-mail',              'with-mail',                    'Compile with support for Mail module'],
       ['with-upload',            'with-upload_module',           'Compile with support for Upload module'],
+      ['with-upload-progress',   'with-upload_progress_module',  'Compile with support for Upload Progress module'],
     ]
   end
   def options
@@ -238,6 +240,9 @@ class NginxFull < Formula
 
     # file upload
     args << "--add-module=#{HOMEBREW_PREFIX}/share/upload-nginx-module" if build.include? "with-upload-module"
+
+    # file upload progress
+    args << "--add-module=#{HOMEBREW_PREFIX}/share/upload-progress-nginx-module" if build.include? "with-upload-progress-module"
 
     if build.head?
       system "./auto/configure", *args
