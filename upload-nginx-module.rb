@@ -11,4 +11,8 @@ class UploadNginxModule < Formula
     (share+'upload-nginx-module').install Dir['*']
   end
 
+  def patches
+    "https://gist.github.com/fdietz/8222432/raw/6c01980b50f25d6fbef16579991af8431c02fb0c/gistfile1.txt"
+  end
+
 end
